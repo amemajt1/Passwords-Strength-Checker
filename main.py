@@ -34,26 +34,49 @@ def check_password_strength(password):
             break
 
     #Special character check 
-    spec_characters = " "
-
+    spec_characters = "!@#$%^&*()-=+[]{}/?,.<>\|*.`~;:'"
+    for char in password:
+        for s in spec_characters:
+            if char == s:
+                strength += 1
+                special_char = True
+                break
+    
     #Lenght check
     if len(password) >= 8:
         length = True
         strength += 1 
     
-
-    # if statements to decide either password is weak, medium, or strong 
+    return strength, upper_l, lower_l, number, special_char, length
     
 
 def main():
+    #window to present the password checker. 
+
     password = input("Enter your password: ")
     strength = check_password_strength(password)
 
     #If statements to print out if the password is weak, medium, or strong 
-    #and give feedback on what is missing and how to improve if it is medium or weak.
+    if strength[0] <= 2:
+        print("Your password is weak.")
+    elif strength[0] <= 4:
+        print("Your password is medium strength.")
+    else:
+        print("Your password is strong.")
+    #and give feedback on what is missing and how to improve if it is medium or weak. (If statements)
+    if strength[1] == False:
+        print("Your password is missing an uppercase letter.")
+    if strength[2] == False:
+        print("Your password is missing a lowercase letter.")
+    if strength[3] == False:
+        print("Your password is missing a number.")
+    if strength[4] == False:
+        print("Your password is missing a special character.")
+    if strength[5] == False:
+        print("Your password is too short.")
+    
 
-
-    #window to present the password checker. 
+    
 
 
 #Main function call 
