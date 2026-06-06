@@ -3,6 +3,11 @@
 #This program checks the strength of a user's password and gives feedback on how strong it is and how to
 # improve it if the password is weak. 
 
+#importing module for window
+from tkinter import * 
+
+
+
 def check_password_strength(password):
     strength = 0 
     upper_l = False
@@ -34,7 +39,7 @@ def check_password_strength(password):
             break
 
     #Special character check 
-    spec_characters = "!@#$%^&*()-=+[]{}/?,.<>\|*.`~;:'"
+    spec_characters = "!@#$%^&*()-=+[]"
     for char in password:
         for s in spec_characters:
             if char == s:
@@ -52,6 +57,22 @@ def check_password_strength(password):
 
 def main():
     #window to present the password checker. 
+    window = Tk()
+
+    #Window configurations
+    window.title("Password Strength Checker")
+    window.geometry("1000x600")
+    icon = PhotoImage(file="password security.png")
+    window.iconphoto(True, icon)
+    #button to enter the password
+    button = Button(window, text = "Enter Password")
+    button.pack()
+    #button.config(command =)
+
+    window.mainloop()
+    
+
+
 
     password = input("Enter your password: ")
     strength = check_password_strength(password)
