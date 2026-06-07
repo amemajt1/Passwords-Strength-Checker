@@ -53,9 +53,10 @@ def check_password_strength(password):
         strength += 1 
     
     return strength, upper_l, lower_l, number, special_char, length
-    
+
 
 def main():
+
     #window to present the password checker. 
     window = Tk()
 
@@ -64,40 +65,83 @@ def main():
     window.geometry("1000x600")
     icon = PhotoImage(file="password security.png")
     window.iconphoto(True, icon)
-    #button to enter the password
-    button = Button(window, text = "Enter Password")
+
+        
+
+    def enter_password(entry_password, label_feedback):
+        password = entry_password.get()
+
+        strength = check_password_strength(password) 
+
+        feedback = ""
+        feedback_s = ""
+        
+        
+        #If statements to print out if the password is weak, medium, or strong 
+
+        if strength[0] <= 2:
+            feedback_s += "Your password is weak.\n"
+            color_s = 'red'
+        elif strength[0] <= 4:
+            feedback_s += "Your password is medium strength.\n"
+            color_s = 'orange'
+        else:
+            feedback_s += "Your password is strong.\n"
+            color_s = 'green'
+
+        #and give feedback on what is missing and how to improve if it is medium or weak. (If statements)
+
+        if strength[1] == False:
+            feedback += "Your password is missing an uppercase letter.\n"
+            color = 'red'
+        if strength[2] == False:
+            feedback += "Your password is missing a lowercase letter.\n"
+            color = 'red'
+
+        if strength[3] == False:
+            feedback += "Your password is missing a number.\n"
+            color = 'red'
+
+        if strength[4] == False:
+            feedback += "Your password is missing a special character.\n"
+            color = 'red'
+
+        if strength[5] == False:
+            feedback += "Your password is too short.\n"
+            color = 'red'
+
+        label_feedback_s.config(text = feedback_s, fg = color_s)
+        label_feedback.config(text = feedback, fg = color)
+        
+
+    #entry window to enter the password
+    entry_password = Entry(window,font = ("Arial",16))
+    entry_password.pack()
+
+    #button to enter the password (used lambda to pass the entry and label as arguments to the function and to avoid
+    # when the button is clicked, it will call the function)
+    button = Button(window, text = "Enter Password", command = lambda: enter_password(entry_password, label_feedback))
     button.pack()
-    #button.config(command =)
+
+    #label -> title 
+    label_title = Label(window, text = "Password Strength Checker", font = ("Arial",24))
+    label_title.pack()
+
+    #label -> says "Enter your password to check its strength"
+    label_intructions = Label(window, text = "Enter you password to check its strength", font = ("Arial",16))
+    label_intructions.pack()
+
+
+    #label -> feedback on the strength of the password 
+    label_feedback_s = Label(window, text = "", font = ("Arial",10))
+    label_feedback_s.pack()
+
+    #label -> feedback on what is missing 
+    label_feedback = Label(window, text = "", font = ("Arial",10))
+    label_feedback.pack()
+
 
     window.mainloop()
-    
-
-
-
-    password = input("Enter your password: ")
-    strength = check_password_strength(password)
-
-    #If statements to print out if the password is weak, medium, or strong 
-    if strength[0] <= 2:
-        print("Your password is weak.")
-    elif strength[0] <= 4:
-        print("Your password is medium strength.")
-    else:
-        print("Your password is strong.")
-    #and give feedback on what is missing and how to improve if it is medium or weak. (If statements)
-    if strength[1] == False:
-        print("Your password is missing an uppercase letter.")
-    if strength[2] == False:
-        print("Your password is missing a lowercase letter.")
-    if strength[3] == False:
-        print("Your password is missing a number.")
-    if strength[4] == False:
-        print("Your password is missing a special character.")
-    if strength[5] == False:
-        print("Your password is too short.")
-    
-
-    
 
 
 #Main function call 
