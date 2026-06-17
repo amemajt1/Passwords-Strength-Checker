@@ -62,7 +62,7 @@ def main():
 
     #Window configurations
     window.title("Password Strength Checker")
-    window.geometry("1000x600")
+    window.geometry("1000x500")
     icon = PhotoImage(file="password security.png")
     window.iconphoto(True, icon)
 
@@ -116,29 +116,41 @@ def main():
 
     #entry window to enter the password
     entry_password = Entry(window,font = ("Arial",16))
-    entry_password.pack()
+    entry_password.place(x = 500, y=250, anchor = "center")
+   
 
-    #button to enter the password (used lambda to pass the entry and label as arguments to the function and to avoid
-    # when the button is clicked, it will call the function)
+    #button to enter the password (used lambda to pass the entry and label as arguments to the function)
     button = Button(window, text = "Enter Password", command = lambda: enter_password(entry_password, label_feedback))
-    button.pack()
+    button.place(x = 500, y = 300, anchor = "center")
+    
 
     #label -> title 
     label_title = Label(window, text = "Password Strength Checker", font = ("Arial",24))
-    label_title.pack()
+    label_title.place(x=500, y=140, anchor = "center")
+    
 
     #label -> says "Enter your password to check its strength"
     label_intructions = Label(window, text = "Enter you password to check its strength", font = ("Arial",16))
-    label_intructions.pack()
+    label_intructions.place(x=500, y=200, anchor = "center")
+    
 
 
     #label -> feedback on the strength of the password 
     label_feedback_s = Label(window, text = "", font = ("Arial",10))
-    label_feedback_s.pack()
+    label_feedback_s.place(x=500, y=350, anchor = "center")
+    
 
     #label -> feedback on what is missing 
     label_feedback = Label(window, text = "", font = ("Arial",10))
-    label_feedback.pack()
+    label_feedback.place(x=500, y=400, anchor = "center")  
+    
+
+    #printing the mouse position for tesitng. 
+
+    #def show_mouse_position(event):
+        #print(event.x, event.y)
+
+    #window.bind('<Motion>', show_mouse_position)
 
 
     window.mainloop()
