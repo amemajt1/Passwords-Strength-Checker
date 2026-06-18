@@ -130,7 +130,7 @@ def main():
     
 
     #label -> says "Enter your password to check its strength"
-    label_intructions = Label(window, text = "Enter you password to check its strength", font = ("Arial",16))
+    label_intructions = Label(window, text = "Enter your password to check its strength", font = ("Arial",16))
     label_intructions.place(x=500, y=200, anchor = "center")
     
 
